@@ -12,16 +12,17 @@ import java.util.List;
  * Program do zwracania przednajwiekszej liczby calkowitej z podanych
  * 
  */
-
 public class Program {
 	
 	/**
 	 * Funkcja main
 	 * @return
 	 */
-	
 	public static void main(String[] args) {
-		out(in());
+		String stringNumbers = in();
+		List<Integer> numbers = parseList(stringNumbers);
+		Integer number = highestButOne(numbers);
+		out(number);
 	}
 	
 	/**
@@ -29,11 +30,20 @@ public class Program {
 	 * 
 	 * @return
 	 */
-	
-	public static List<Integer> in() {
+	public static String in() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Podaj liczby: ");
 		String allNumbers = sc.nextLine();
+		return allNumbers;	
+	}
+	
+	/**
+	 * Funkcja zamienia stringa na listê intów
+	 * 
+	 * @param allNumbers
+	 * @return
+	 */
+	public static List<Integer> parseList(String allNumbers){
 		List<String> numbers = new ArrayList<>();
 		numbers = Arrays.asList(allNumbers.split("\\s"));
 		List<Integer> indeedNumbers = new ArrayList<>();
@@ -48,10 +58,9 @@ public class Program {
 	 * 
 	 * @param numbers
 	 */
-	
-	public static void out(List<Integer> indeedNumbers) {
-
-		System.out.println(highestButOne(indeedNumbers));
+	public static void out(Integer number) {
+		System.out.println("Przednajwieksza liczba z podanych to: ");
+		System.out.println(number);
 	}
 	
 	/**
@@ -61,7 +70,6 @@ public class Program {
 	 * 
 	 * @return
 	 */
-	
 	public static Integer highestButOne(List<Integer> list) {
 		Collections.sort(list);
 		Collections.reverse(list);
