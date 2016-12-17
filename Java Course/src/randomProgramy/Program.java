@@ -47,7 +47,8 @@ public class Program {
 		numbers = Arrays.asList(allNumbers.split("\\s"));
 		List<Integer> indeedNumbers = new ArrayList<>();
 		for (String numberAsString : numbers) {
-			indeedNumbers.add(Integer.parseInt(numberAsString));
+			if(isNumber(numberAsString))
+				indeedNumbers.add(Integer.parseInt(numberAsString));
 		}
 		return indeedNumbers;
 	}
@@ -84,5 +85,18 @@ public class Program {
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * Funkcja sprawdza czy w danym stringu znajduj¹ siê tylko cyfry
+	 * @param s
+	 * @return true kiedy s¹ tylko cyfry, false kiedy sa inne znaki
+	 */
+	public static boolean isNumber(String s) {
+		for(int i=0;i<s.length();i++) {
+			if(s.charAt(i)<='0' || s.charAt(i)>='9')
+				return false;
+		}
+		return true;
 	}
 }
