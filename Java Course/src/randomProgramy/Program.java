@@ -47,7 +47,7 @@ public class Program {
 		numbers = Arrays.asList(allNumbers.split("\\s"));
 		List<Integer> indeedNumbers = new ArrayList<>();
 		for (String numberAsString : numbers) {
-			if(isNumber(numberAsString))
+			if (isNumber(numberAsString))
 				indeedNumbers.add(Integer.parseInt(numberAsString));
 		}
 		return indeedNumbers;
@@ -68,7 +68,8 @@ public class Program {
 	 * 
 	 * @param list
 	 * 
-	 * @return Zwraca przednajwiêksz¹ liczbê z listy, lub null je¿eli przednajwiêksza liczba nie istnieje
+	 * @return Zwraca przednajwiêksz¹ liczbê z listy, lub null je¿eli
+	 *         przednajwiêksza liczba nie istnieje
 	 */
 	public static Integer highestButOne(List<Integer> list) {
 		Collections.sort(list);
@@ -86,16 +87,21 @@ public class Program {
 		}
 		return null;
 	}
-	
+
 	/**
-	 * Funkcja sprawdza czy w danym stringu znajduj¹ siê tylko cyfry
+	 * Funkcja sprawdza czy w danym stringu znajduj¹ siê tylko cyfry lub ewentualnie minus na pocz¹tku
+	 * 
 	 * @param s
-	 * @return true kiedy s¹ tylko cyfry, false kiedy sa inne znaki
+	 * @return true kiedy s¹ tylko cyfry lub minus na pocz¹tku, false kiedy sa inne znaki
 	 */
 	public static boolean isNumber(String s) {
-		for(int i=0;i<s.length();i++) {
-			if(s.charAt(i)<='0' || s.charAt(i)>='9')
-				return false;
+		if ((s.charAt(0) <= '0' || s.charAt(0) >= '9') && s.charAt(0) != '-')
+			return false;
+		else {
+			for (int i = 1; i < s.length(); i++) {
+				if (s.charAt(i) <= '0' || s.charAt(i) >= '9')
+					return false;
+			}
 		}
 		return true;
 	}

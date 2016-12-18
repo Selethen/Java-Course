@@ -8,10 +8,16 @@ import java.util.List;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Random;
-
+/**
+ * Testy do programu zwracaj¹cego przednajwiêksza liczbê ca³kowit¹ z podanych
+ * @author Selethen
+ *
+ */
 public class programTest{
 
-	//sprawdzanie dzia³ania funkcji highestButOne w przypadku tylko liczb dodatnich
+	/**
+	 * Testowanie metody highestButOne w przypadku podania tylko liczb dodatnich
+	 */
 	@Test
 	public void testHighestButOneLiczbyDodatnie() {
 		List<Integer> list1 = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
@@ -36,7 +42,9 @@ public class programTest{
 					 new Integer(2147483646), Program.highestButOne(list4));
 	}
 	
-	//sprawdzanie dzia³ania funkcji highestButOne w przypadku liczb dodatnich i/lub ujemnych
+	/**
+	 * Testowanie metody highestButOne w przypadku podania liczb dodatnich i/lub ujemnych
+	 */
 	@Test
 	public void testHighestButOneLiczbyUjemneIDodatnie() {
 		List<Integer> list1 = Arrays.asList(58, -487275, -6662, -489725, -24242424);
@@ -61,7 +69,9 @@ public class programTest{
 					 new Integer(-2147483634), Program.highestButOne(list4));
 	}
 	
-	//sprawdzanie dzia³ania funkcji highestButOne w przypadku bardzo du¿ej iloœci danych
+	/**
+	 * Testowanie metody highestButOne w przypadku podania bardzo du¿ej iloœci danych
+	 */
 	@Test
 	public void testHighestButOneALotOfData() {
 		Random generator = new Random();
@@ -79,8 +89,10 @@ public class programTest{
 				  	  Program.highestButOne(list2));
 	}
 	
-	//sprawdzenie dzia³ania funkcji highestButOne w przypadku podania jednej liczby
-	//lub wy³¹cznie tych samych liczb
+	/**
+	 * Testowanie metody highestButOne w przypadku podania tylko jednej liczby lub wielokrotnie
+	 * tej samej liczby
+	 */
 	@Test
 	public void testHighestButOneSameNumbers() {
 		List<Integer> list1 = Arrays.asList(0);
