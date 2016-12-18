@@ -54,7 +54,7 @@ public class programTest{
 		List<Integer> list2 = Arrays.asList(-2222222, -2222222, -2222222, -2222222, -2222222, 
 											-2222222, -2222222, -22222222);
 		assertEquals("b³ad w przypadku liczb ujemnych",
-					 new Integer(-2222222), Program.highestButOne(list2));
+					 new Integer(-22222222), Program.highestButOne(list2));
 		
 		List<Integer> list3 = Arrays.asList(-123456789, -12345678, -1234567, -123456, -12345, -1234,
 											-123, -12, -1, 1, 12, 123, 1234, 12345, 123456, 1234567);
@@ -105,7 +105,7 @@ public class programTest{
 											2147483646, 2147483646, 2147483646, 2147483646, 2147483646);
 		assertNull("b³¹d w przypadku podania wiele razy tej samej liczby", Program.highestButOne(list3));
 		
-		List<Integer> list4 = Arrays.asList(-123456, -123456, -123456, -123456, -123456, -123456, -123456
+		List<Integer> list4 = Arrays.asList(-123456, -123456, -123456, -123456, -123456, -123456, -123456,
 											-123456, -123456, -123456, -123456, -123456, -123456, -123456);
 		assertNull("b³¹d w przypadku podania wiele razy tej samej liczby", Program.highestButOne(list4));
 	}
