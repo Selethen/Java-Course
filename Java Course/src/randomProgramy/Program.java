@@ -1,10 +1,10 @@
 package randomProgramy;
 
-import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * @author Lukasz Parulski
@@ -79,7 +79,7 @@ public class Program {
 			return list.get(1);
 		else {
 			for (i = 0; i < list.size() - 1; i++) {
-				if  (!(list.get(i).equals(list.get(i+1)))) {
+				if (!(list.get(i).equals(list.get(i + 1)))) {
 					return list.get(i + 1);
 				}
 
@@ -89,17 +89,19 @@ public class Program {
 	}
 
 	/**
-	 * Funkcja sprawdza czy w danym stringu znajduj¹ siê tylko cyfry lub ewentualnie minus na pocz¹tku
+	 * Funkcja sprawdza czy w danym stringu znajduj¹ siê tylko cyfry lub
+	 * ewentualnie minus na pocz¹tku
 	 * 
 	 * @param s
-	 * @return true kiedy s¹ tylko cyfry lub minus na pocz¹tku, false kiedy sa inne znaki
+	 * @return true kiedy s¹ tylko cyfry lub minus na pocz¹tku, false kiedy sa
+	 *         inne znaki
 	 */
 	public static boolean isNumber(String s) {
-		if ((s.charAt(0) <= '0' || s.charAt(0) >= '9') && s.charAt(0) != '-')
+		if ((s.charAt(0) < '0' || s.charAt(0) > '9') && s.charAt(0) != '-')
 			return false;
 		else {
 			for (int i = 1; i < s.length(); i++) {
-				if (s.charAt(i) <= '0' || s.charAt(i) >= '9')
+				if (s.charAt(i) < '0' || s.charAt(i) > '9')
 					return false;
 			}
 		}
