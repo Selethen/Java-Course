@@ -1,8 +1,10 @@
 package Testy;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -91,22 +93,122 @@ public class programTest {
 
 	/**
 	 * Testowanie metody highestButOne w przypadku podania tylko jednej liczby
-	 * lub wielokrotnie tej samej liczby
 	 */
 	@Test
-	public void testHighestButOneSameNumbers() {
+	public void testHighestButOneOneNumber() {
 		List<Integer> list1 = Arrays.asList(0);
 		assertNull("b³¹d w przypadku podania jednej liczby", Program.highestButOne(list1));
 
 		List<Integer> list2 = Arrays.asList(2147483647);
 		assertNull("b³¹d w przypadku podania jednej liczby", Program.highestButOne(list2));
+	}
 
-		List<Integer> list3 = Arrays.asList(2147483646, 2147483646, 2147483646, 2147483646, 2147483646, 2147483646,
+	/**
+	 * Testowanie metody highestButOne w przypadku podania wielokrotnie tej
+	 * samej liczby
+	 */
+	@Test
+	public void testHighestButOneSameNumbers() {
+		List<Integer> list1 = Arrays.asList(2147483646, 2147483646, 2147483646, 2147483646, 2147483646, 2147483646,
 				2147483646, 2147483646, 2147483646, 2147483646);
-		assertNull("b³¹d w przypadku podania wiele razy tej samej liczby", Program.highestButOne(list3));
+		assertNull("b³¹d w przypadku podania wiele razy tej samej liczby dodatniej", Program.highestButOne(list1));
 
-		List<Integer> list4 = Arrays.asList(-123456, -123456, -123456, -123456, -123456, -123456, -123456, -123456,
+		List<Integer> list2 = Arrays.asList(-123456, -123456, -123456, -123456, -123456, -123456, -123456, -123456,
 				-123456, -123456, -123456, -123456, -123456, -123456);
-		assertNull("b³¹d w przypadku podania wiele razy tej samej liczby", Program.highestButOne(list4));
+		assertNull("b³¹d w przypadku podania wiele razy tej samej liczby ujemnej", Program.highestButOne(list2));
+	}
+
+	/**
+	 * Testowanie metody parseList w przypadku podania tylko liczb dodatnich
+	 */
+	@Test
+	public void testParseListOnlyPositiveNumbers() {
+		List<Integer> list1 = Arrays.asList(123, 123456, 98573, 2147483646, 10, 1000, 100, 11111);
+		String word1 = new String("123 123456 98573 2147483646 10 1000 100 11111");
+		assertEquals("b³¹d w przypadku podania ³añcucha zawieraj¹cego tylko liczby dodatnie", list1,
+				Program.parseList(word1));
+
+		List<Integer> list2 = Arrays.asList(1, 11, 111, 1111, 11111, 111111, 1111111, 11111111, 111111111, 1111111111);
+		String word2 = new String("1 11 111 1111 11111 111111 1111111 11111111 111111111 1111111111");
+		assertEquals("b³¹d w przypadku podania ³añcucha zawieraj¹cego tylko liczby dodatnie", list2,
+				Program.parseList(word2));
+	}
+
+	/**
+	 * Testowanie metody parseList w przypadku podania liczb dodatnich i/lub
+	 * ujemnych
+	 */
+	@Test
+	public void testParseListPositiveAndNegativeNumbers() {
+		List<Integer> list1 = Arrays.asList(-2147483636, -123456789, -1000, 1000, 123456789, 2147483637);
+		String word1 = new String("-2147483636 -123456789 -1000 1000 123456789 2147483637");
+		assertEquals("b³¹d w przypadku podania ³añcucha zawieraj¹cego", list1, Program.parseList(word1));
+
+		List<Integer> list2 = Arrays.asList(-1010101010, -101010101, -10101010, -1010101, -101010, -10101, -1010, -101,
+				-10, -1);
+		String word2 = new String("-1010101010 -101010101 -10101010 -1010101 -101010 -10101 -1010 -101 -10 -1");
+		assertEquals("b³¹d w przypadku podania ³añcucha zawieraj¹cego", list2, Program.parseList(word2));
+	}
+
+	/**
+	 * Testowanie metody parseList w przypadku podania liczb z b³êdnymi znakami
+	 */
+	@Test
+	public void testParseListNumbersWithTokens() {
+		List<Integer> list1 = Arrays.asList(10101, -300);
+		String word1 = new String("-12-23 17.53 10101 #123 & *123 1010+1 -300");
+		assertEquals("b³¹d w przypadku podania ³añcucha zawieraj¹cego liczby z b³êdnymi znakami", list1,
+				Program.parseList(word1));
+
+		List<Integer> list2 = Arrays.asList(1, 0, 199, 0, 888);
+		String word2 = new String("1, 1, 1, 1 0 199 0 1%1 1- 15, 888");
+		assertEquals("b³¹d w przypadku podania ³añcucha zawieraj¹cego liczby z b³êdnymi znakami", list2,
+				Program.parseList(word2));
+
+	}
+
+	/**
+	 * Testowanie metody parseList w przypadku podania liter z liczbami
+	 */
+	@Test
+	public void testParseListNumbersAndLetters() {
+		List<Integer> list1 = Arrays.asList();
+		String word1 = new String("sdgjh dfgjkhsdfg fdgjshkfgsdf fdgsdfg osdfigj");
+		assertEquals("b³¹d w przypadku podania ³añcucha zawieraj¹cego same litery", list1, Program.parseList(word1));
+
+		List<Integer> list2 = Arrays.asList(123, 1000080);
+		String word2 = new String("1o23 123 214564kki x0x 1000f0001 1000080 j4j4j4 412089r 1515j15");
+		assertEquals("b³¹d w przypadku podania ³añcucha zawieraj¹cego litery i liczby", list2,
+				Program.parseList(word2));
+	}
+
+	/**
+	 * Testowanie metody isNumber w przypadku podania liczb
+	 */
+	@Test
+	public void testIsNumberNumbers() {
+		assertTrue("b³¹d w przypadku podania liczby dodatniej", Program.isNumber(new String("2147483647")));
+		assertTrue("b³¹d w przypadku podania liczby ujemnej", Program.isNumber(new String("-2147483646")));
+	}
+
+	/**
+	 * Testowanie metody isNumber w przypadku podania liczb ze znakami
+	 * specjalnymi
+	 */
+	@Test
+	public void testIsNumberInvalidData() {
+		assertFalse("b³¹d w przypadku podania znaków specjalnych", Program.isNumber(new String("^%$#&@")));
+		assertFalse("b³¹d w przypadku podania cyfr i znaków specjalnych", Program.isNumber(new String("-123-123.")));
+	}
+
+	/**
+	 * Testowanie metody isNumber w przypadku podania liter
+	 */
+	@Test
+	public void testIsNumberLetters() {
+		assertFalse("b³¹d w przypadku podania liter", Program.isNumber(new String("afbghdjfgj")));
+		assertFalse("b³¹d w przypadku podania liter", Program.isNumber(new String("KjTbhNtyHJbYnm")));
+		assertFalse("b³¹d w przypadku podania cyfr i liter", Program.isNumber(new String("1o1o1o1o1o1")));
+		assertFalse("b³¹d w przypadku podania cyfr i liter", Program.isNumber(new String("124jkn412")));
 	}
 }
