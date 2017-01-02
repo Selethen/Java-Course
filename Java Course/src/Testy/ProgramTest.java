@@ -21,13 +21,13 @@ import randomProgramy.Program;
  * @author Selethen
  *
  */
-public class programTest {
+public class ProgramTest {
 
 	/**
 	 * Testowanie metody highestButOne w przypadku podania tylko liczb dodatnich
 	 */
 	@Test
-	public void testHighestButOneLiczbyDodatnie() {
+	public void testHighestButOnePositiveNumbers() {
 		List<Integer> list = Arrays.asList(1, 5, 8, 10);
 		assertEquals("b³¹d w przypadku liczb dodatnich", new Integer(8), Program.highestButOne(list));
 
@@ -53,7 +53,7 @@ public class programTest {
 	 * ujemnych
 	 */
 	@Test
-	public void testHighestButOneLiczbyUjemneIDodatnie() {
+	public void testHighestButOnePositiveAndNegativeNumbers() {
 		List<Integer> list1 = Arrays.asList(58, -487275, -6662, -489725, -24242424);
 		assertEquals("b³ad w przypadku liczb dodatnich i ujemnych", new Integer(-6662), Program.highestButOne(list1));
 
@@ -81,13 +81,15 @@ public class programTest {
 		Random generator = new Random();
 
 		List<Integer> list1 = new ArrayList<>();
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 10000; i++) {
 			list1.add(generator.nextInt(2147483647));
+		}
 		assertNotNull("b³¹d w przypadku du¿ej iloœci liczb dodatnich", Program.highestButOne(list1));
 
 		List<Integer> list2 = new ArrayList<>();
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 10000; i++) {
 			list2.add(generator.nextInt());
+		}
 		assertNotNull("b³¹d w przypadku du¿ej iloœci liczb dodatnich i ujemnych", Program.highestButOne(list2));
 	}
 
@@ -187,8 +189,8 @@ public class programTest {
 	 */
 	@Test
 	public void testIsNumberNumbers() {
-		assertTrue("b³¹d w przypadku podania liczby dodatniej", Program.isNumber(new String("2147483647")));
-		assertTrue("b³¹d w przypadku podania liczby ujemnej", Program.isNumber(new String("-2147483646")));
+		assertTrue("b³¹d w przypadku podania liczby dodatniej", Program.isNumber("2147483647"));
+		assertTrue("b³¹d w przypadku podania liczby ujemnej", Program.isNumber("-2147483646"));
 	}
 
 	/**
@@ -197,8 +199,8 @@ public class programTest {
 	 */
 	@Test
 	public void testIsNumberInvalidData() {
-		assertFalse("b³¹d w przypadku podania znaków specjalnych", Program.isNumber(new String("^%$#&@")));
-		assertFalse("b³¹d w przypadku podania cyfr i znaków specjalnych", Program.isNumber(new String("-123-123.")));
+		assertFalse("b³¹d w przypadku podania znaków specjalnych", Program.isNumber("^%$#&@"));
+		assertFalse("b³¹d w przypadku podania cyfr i znaków specjalnych", Program.isNumber("-123-123."));
 	}
 
 	/**
@@ -206,9 +208,9 @@ public class programTest {
 	 */
 	@Test
 	public void testIsNumberLetters() {
-		assertFalse("b³¹d w przypadku podania liter", Program.isNumber(new String("afbghdjfgj")));
-		assertFalse("b³¹d w przypadku podania liter", Program.isNumber(new String("KjTbhNtyHJbYnm")));
-		assertFalse("b³¹d w przypadku podania cyfr i liter", Program.isNumber(new String("1o1o1o1o1o1")));
-		assertFalse("b³¹d w przypadku podania cyfr i liter", Program.isNumber(new String("124jkn412")));
+		assertFalse("b³¹d w przypadku podania liter", Program.isNumber("afbghdjfgj"));
+		assertFalse("b³¹d w przypadku podania liter", Program.isNumber("KjTbhNtyHJbYnm"));
+		assertFalse("b³¹d w przypadku podania cyfr i liter", Program.isNumber("1o1o1o1o1o1"));
+		assertFalse("b³¹d w przypadku podania cyfr i liter", Program.isNumber("124jkn412"));
 	}
 }

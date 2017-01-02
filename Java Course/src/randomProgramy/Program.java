@@ -75,9 +75,12 @@ public class Program {
 		Collections.sort(list);
 		Collections.reverse(list);
 		int i;
-		if (list.size() == 2)
-			return list.get(1);
-		else {
+		if (list.size() == 2) {
+			if (list.get(0) != list.get(1))
+				return list.get(1);
+			else
+				return null;
+		} else {
 			for (i = 0; i < list.size() - 1; i++) {
 				if (!(list.get(i).equals(list.get(i + 1)))) {
 					return list.get(i + 1);
