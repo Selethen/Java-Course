@@ -1,10 +1,10 @@
 package randomProgramy;
 
-import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * @author Lukasz Parulski
@@ -47,7 +47,8 @@ public class Program {
 		numbers = Arrays.asList(allNumbers.split("\\s"));
 		List<Integer> indeedNumbers = new ArrayList<>();
 		for (String numberAsString : numbers) {
-			indeedNumbers.add(Integer.parseInt(numberAsString));
+			if (isNumber(numberAsString))
+				indeedNumbers.add(Integer.parseInt(numberAsString));
 		}
 		return indeedNumbers;
 	}
@@ -67,22 +68,47 @@ public class Program {
 	 * 
 	 * @param list
 	 * 
-	 * @return Zwraca przednajwiêksz¹ liczbê z listy, lub null je¿eli przednajwiêksza liczba nie istnieje
+	 * @return Zwraca przednajwiêksz¹ liczbê z listy, lub null je¿eli
+	 *         przednajwiêksza liczba nie istnieje
 	 */
 	public static Integer highestButOne(List<Integer> list) {
 		Collections.sort(list);
 		Collections.reverse(list);
 		int i;
-		if (list.size() == 2)
-			return list.get(1);
-		else {
+		if (list.size() == 2) {
+			if (list.get(0).equals(list.get(1)))
+				return list.get(1);
+			else
+				return null;
+		} else {
 			for (i = 0; i < list.size() - 1; i++) {
-				if (list.get(i) != list.get(i + 1)) {
+				if (!(list.get(i).equals(list.get(i + 1)))) {
 					return list.get(i + 1);
 				}
 
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * Funkcja sprawdza czy w danym stringu znajduj¹ siê tylko cyfry lub
+	 * ewentualnie minus na pocz¹tku
+	 * 
+	 * @param s
+	 * @return true kiedy s¹ tylko cyfry lub minus na pocz¹tku, false kiedy sa
+	 *         inne znaki
+	 */
+	public static boolean isNumber(String s) {
+		if ((s.charAt(0) < '0' || s.charAt(0) > '9') && s.charAt(0) != '-') {
+			return false;
+		} else {
+			for (int i = 1; i < s.length(); i++) {
+				if (s.charAt(i) < '0' || s.charAt(i) > '9') {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 }
