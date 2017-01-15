@@ -76,7 +76,7 @@ public class Program {
 		Collections.reverse(list);
 		int i;
 		if (list.size() == 2) {
-			if (list.get(0) != list.get(1))
+			if (list.get(0).equals(list.get(1)))
 				return list.get(1);
 			else
 				return null;
@@ -100,12 +100,13 @@ public class Program {
 	 *         inne znaki
 	 */
 	public static boolean isNumber(String s) {
-		if ((s.charAt(0) < '0' || s.charAt(0) > '9') && s.charAt(0) != '-')
+		if ((s.charAt(0) < '0' || s.charAt(0) > '9') && s.charAt(0) != '-') {
 			return false;
-		else {
+		} else {
 			for (int i = 1; i < s.length(); i++) {
-				if (s.charAt(i) < '0' || s.charAt(i) > '9')
+				if (s.charAt(i) < '0' || s.charAt(i) > '9') {
 					return false;
+				}
 			}
 		}
 		return true;
