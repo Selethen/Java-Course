@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
 /**
  * @author Lukasz Parulski
  *
@@ -14,14 +16,18 @@ import java.util.Scanner;
  */
 public class Program {
 
+	static Logger log = Logger.getLogger(Program.class.getName());
+
 	/**
 	 * Funkcja main
 	 */
 	public static void main(String[] args) {
+		log.info("Program startuje");
 		String stringNumbers = in();
 		List<Integer> numbers = parseList(stringNumbers);
 		Integer number = highestButOne(numbers);
 		out(number);
+		log.info("Koñczenie dzia³ania programu");
 	}
 
 	/**
@@ -33,6 +39,8 @@ public class Program {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Podaj liczby: ");
 		String allNumbers = sc.nextLine();
+		log.debug("Wprowadzony ³añcuch znaków to: ");
+		log.debug(allNumbers);
 		return allNumbers;
 	}
 
@@ -50,6 +58,7 @@ public class Program {
 			if (isNumber(numberAsString))
 				indeedNumbers.add(Integer.parseInt(numberAsString));
 		}
+		log.debug("String po sparsowaniu na listê liczb wygl¹da nastêpuj¹co: " + indeedNumbers);
 		return indeedNumbers;
 	}
 
@@ -59,8 +68,8 @@ public class Program {
 	 * @param numbers
 	 */
 	public static void out(Integer number) {
-		System.out.println("Przednajwieksza liczba z podanych to: ");
-		System.out.println(number);
+		log.debug("Zwracanie elementu " + number);
+		System.out.println("Przednajwieksza liczba z podanych to: " + number);
 	}
 
 	/**
@@ -76,18 +85,23 @@ public class Program {
 		Collections.reverse(list);
 		int i;
 		if (list.size() == 2) {
-			if (list.get(0).equals(list.get(1)))
+			if (!list.get(0).equals(list.get(1))) {
+				log.debug("Na liœcie znajduj¹ siê 2 ró¿ne elementy");
 				return list.get(1);
-			else
+			} else {
+				log.debug("Na liœcie znajduj¹ siê 2 takie same elementy");
 				return null;
+			}
 		} else {
 			for (i = 0; i < list.size() - 1; i++) {
 				if (!(list.get(i).equals(list.get(i + 1)))) {
+					log.debug("Z list¹ wszystko jest OK");
 					return list.get(i + 1);
 				}
 
 			}
 		}
+		log.debug("Na liœcie jest tylko jeden element lub jest wiele tych samych elementów");
 		return null;
 	}
 
@@ -101,14 +115,17 @@ public class Program {
 	 */
 	public static boolean isNumber(String s) {
 		if ((s.charAt(0) < '0' || s.charAt(0) > '9') && s.charAt(0) != '-') {
+			log.debug("Ci¹g znaków " + s + " nie jest liczb¹");
 			return false;
 		} else {
 			for (int i = 1; i < s.length(); i++) {
 				if (s.charAt(i) < '0' || s.charAt(i) > '9') {
+					log.debug("Ci¹g znaków " + s + " nie jest liczb¹");
 					return false;
 				}
 			}
 		}
+		log.debug("Ci¹g znaków " + s + " jest liczb¹");
 		return true;
 	}
 }

@@ -1,0 +1,13 @@
+2017-01-19 16:59:28 INFO  Program:25 - Program startuje
+2017-01-19 16:59:31 DEBUG Program:42 - Wprowadzony ³añcuch znaków to: 
+2017-01-19 16:59:31 DEBUG Program:43 - 1 2 3 4 5 6
+2017-01-19 16:59:31 DEBUG Program:128 - Ci¹g znaków 1 jest liczb¹
+2017-01-19 16:59:31 DEBUG Program:128 - Ci¹g znaków 2 jest liczb¹
+2017-01-19 16:59:31 DEBUG Program:128 - Ci¹g znaków 3 jest liczb¹
+2017-01-19 16:59:31 DEBUG Program:128 - Ci¹g znaków 4 jest liczb¹
+2017-01-19 16:59:31 DEBUG Program:128 - Ci¹g znaków 5 jest liczb¹
+2017-01-19 16:59:31 DEBUG Program:128 - Ci¹g znaków 6 jest liczb¹
+2017-01-19 16:59:31 DEBUG Program:61 - String po sparsowaniu na listê liczb wygl¹da nastêpuj¹co: [1, 2, 3, 4, 5, 6]
+2017-01-19 16:59:31 DEBUG Program:98 - Z list¹ wszystko jest OK
+2017-01-19 16:59:31 DEBUG Program:71 - Zwracanie elementu 5
+2017-01-19 16:59:31 INFO  Program:30 - Koñczenie dzia³ania programu
