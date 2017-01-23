@@ -21,13 +21,18 @@ public class Program {
 	/**
 	 * Funkcja main
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws CalculatingException {
 		log.info("Program startuje");
-		String stringNumbers = in();
-		List<Integer> numbers = parseList(stringNumbers);
-		Integer number = highestButOne(numbers);
-		out(number);
-		log.info("Koñczenie dzia³ania programu");
+		try {
+			String stringNumbers = in();
+			List<Integer> numbers = parseList(stringNumbers);
+			Integer number = highestButOne(numbers);
+			out(number);
+			log.info("Koñczenie dzia³ania programu");
+		} catch (CalculatingException exception) {
+			System.out.println("Nast¹pi³ b³¹d.");
+			exception.printStackTrace();
+		}
 	}
 
 	/**
@@ -80,7 +85,7 @@ public class Program {
 	 * @return Zwraca przednajwiêksz¹ liczbê z listy, lub null je¿eli
 	 *         przednajwiêksza liczba nie istnieje
 	 */
-	public static Integer highestButOne(List<Integer> list) {
+	public static Integer highestButOne(List<Integer> list) throws CalculatingException {
 		Collections.sort(list);
 		Collections.reverse(list);
 		int i;
@@ -90,7 +95,7 @@ public class Program {
 				return list.get(1);
 			} else {
 				log.debug("Na liœcie znajduj¹ siê 2 takie same elementy");
-				return null;
+				throw new CalculatingException("Nie mo¿na wskazaæ przednajmniejszej liczby");
 			}
 		} else {
 			for (i = 0; i < list.size() - 1; i++) {
@@ -102,7 +107,7 @@ public class Program {
 			}
 		}
 		log.debug("Na liœcie jest tylko jeden element lub jest wiele tych samych elementów");
-		return null;
+		throw new CalculatingException("Nie mo¿na wskazaæ przednajmniejszej liczby");
 	}
 
 	/**
