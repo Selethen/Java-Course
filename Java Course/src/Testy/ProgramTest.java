@@ -1,10 +1,8 @@
 package Testy;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,7 +11,8 @@ import java.util.Random;
 
 import org.junit.Test;
 
-import randomProgramy.Program;
+import pl.com.selethen.CalculatingException;
+import pl.com.selethen.Program;
 
 /**
  * Testy do programu zwracaj¹cego przednajwiêksza liczbê ca³kowit¹ z podanych
@@ -25,9 +24,11 @@ public class ProgramTest {
 
 	/**
 	 * Testowanie metody highestButOne w przypadku podania tylko liczb dodatnich
+	 * 
+	 * @throws Exception
 	 */
-	@Test
-	public void testHighestButOnePositiveNumbers() {
+
+	public void testHighestButOnePositiveNumbers() throws Exception {
 		List<Integer> list = Arrays.asList(1, 5, 8, 10);
 		assertEquals("b³¹d w przypadku liczb dodatnich", new Integer(8), Program.highestButOne(list));
 
@@ -53,7 +54,7 @@ public class ProgramTest {
 	 * ujemnych
 	 */
 	@Test
-	public void testHighestButOnePositiveAndNegativeNumbers() {
+	public void testHighestButOnePositiveAndNegativeNumbers() throws Exception {
 		List<Integer> list1 = Arrays.asList(58, -487275, -6662, -489725, -24242424);
 		assertEquals("b³ad w przypadku liczb dodatnich i ujemnych", new Integer(-6662), Program.highestButOne(list1));
 
@@ -77,7 +78,7 @@ public class ProgramTest {
 	 * danych
 	 */
 	@Test
-	public void testHighestButOneALotOfData() {
+	public void testHighestButOneALotOfData() throws Exception {
 		Random generator = new Random();
 
 		List<Integer> list1 = new ArrayList<>();
@@ -96,8 +97,8 @@ public class ProgramTest {
 	/**
 	 * Testowanie metody highestButOne w przypadku podania tylko jednej liczby
 	 */
-	@Test
-	public void testHighestButOneOneNumber() {
+	@Test(expected = CalculatingException.class)
+	public void testHighestButOneOneNumber() throws Exception {
 		List<Integer> list1 = Arrays.asList(0);
 		assertNull("b³¹d w przypadku podania jednej liczby", Program.highestButOne(list1));
 
@@ -109,8 +110,8 @@ public class ProgramTest {
 	 * Testowanie metody highestButOne w przypadku podania wielokrotnie tej
 	 * samej liczby
 	 */
-	@Test
-	public void testHighestButOneSameNumbers() {
+	@Test(expected = CalculatingException.class)
+	public void testHighestButOneSameNumbers() throws Exception {
 		List<Integer> list1 = Arrays.asList(2147483646, 2147483646, 2147483646, 2147483646, 2147483646, 2147483646,
 				2147483646, 2147483646, 2147483646, 2147483646);
 		assertNull("b³¹d w przypadku podania wiele razy tej samej liczby dodatniej", Program.highestButOne(list1));
@@ -124,7 +125,7 @@ public class ProgramTest {
 	 * Testowanie metody parseList w przypadku podania tylko liczb dodatnich
 	 */
 	@Test
-	public void testParseListOnlyPositiveNumbers() {
+	public void testParseListOnlyPositiveNumbers() throws Exception {
 		List<Integer> list1 = Arrays.asList(123, 123456, 98573, 2147483646, 10, 1000, 100, 11111);
 		String word1 = new String("123 123456 98573 2147483646 10 1000 100 11111");
 		assertEquals("b³¹d w przypadku podania ³añcucha zawieraj¹cego tylko liczby dodatnie", list1,
@@ -141,7 +142,7 @@ public class ProgramTest {
 	 * ujemnych
 	 */
 	@Test
-	public void testParseListPositiveAndNegativeNumbers() {
+	public void testParseListPositiveAndNegativeNumbers() throws Exception {
 		List<Integer> list1 = Arrays.asList(-2147483636, -123456789, -1000, 1000, 123456789, 2147483637);
 		String word1 = new String("-2147483636 -123456789 -1000 1000 123456789 2147483637");
 		assertEquals("b³¹d w przypadku podania ³añcucha zawieraj¹cego", list1, Program.parseList(word1));
@@ -155,8 +156,8 @@ public class ProgramTest {
 	/**
 	 * Testowanie metody parseList w przypadku podania liczb z b³êdnymi znakami
 	 */
-	@Test
-	public void testParseListNumbersWithTokens() {
+	@Test(expected = CalculatingException.class)
+	public void testParseListNumbersWithTokens() throws Exception {
 		List<Integer> list1 = Arrays.asList(10101, -300);
 		String word1 = new String("-12-23 17.53 10101 #123 & *123 1010+1 -300");
 		assertEquals("b³¹d w przypadku podania ³añcucha zawieraj¹cego liczby z b³êdnymi znakami", list1,
@@ -172,8 +173,8 @@ public class ProgramTest {
 	/**
 	 * Testowanie metody parseList w przypadku podania liter z liczbami
 	 */
-	@Test
-	public void testParseListNumbersAndLetters() {
+	@Test(expected = CalculatingException.class)
+	public void testParseListNumbersAndLetters() throws Exception {
 		List<Integer> list1 = Arrays.asList();
 		String word1 = new String("sdgjh dfgjkhsdfg fdgjshkfgsdf fdgsdfg osdfigj");
 		assertEquals("b³¹d w przypadku podania ³añcucha zawieraj¹cego same litery", list1, Program.parseList(word1));
@@ -182,35 +183,5 @@ public class ProgramTest {
 		String word2 = new String("1o23 123 214564kki x0x 1000f0001 1000080 j4j4j4 412089r 1515j15");
 		assertEquals("b³¹d w przypadku podania ³añcucha zawieraj¹cego litery i liczby", list2,
 				Program.parseList(word2));
-	}
-
-	/**
-	 * Testowanie metody isNumber w przypadku podania liczb
-	 */
-	@Test
-	public void testIsNumberNumbers() {
-		assertTrue("b³¹d w przypadku podania liczby dodatniej", Program.isNumber("2147483647"));
-		assertTrue("b³¹d w przypadku podania liczby ujemnej", Program.isNumber("-2147483646"));
-	}
-
-	/**
-	 * Testowanie metody isNumber w przypadku podania liczb ze znakami
-	 * specjalnymi
-	 */
-	@Test
-	public void testIsNumberInvalidData() {
-		assertFalse("b³¹d w przypadku podania znaków specjalnych", Program.isNumber("^%$#&@"));
-		assertFalse("b³¹d w przypadku podania cyfr i znaków specjalnych", Program.isNumber("-123-123."));
-	}
-
-	/**
-	 * Testowanie metody isNumber w przypadku podania liter
-	 */
-	@Test
-	public void testIsNumberLetters() {
-		assertFalse("b³¹d w przypadku podania liter", Program.isNumber("afbghdjfgj"));
-		assertFalse("b³¹d w przypadku podania liter", Program.isNumber("KjTbhNtyHJbYnm"));
-		assertFalse("b³¹d w przypadku podania cyfr i liter", Program.isNumber("1o1o1o1o1o1"));
-		assertFalse("b³¹d w przypadku podania cyfr i liter", Program.isNumber("124jkn412"));
 	}
 }

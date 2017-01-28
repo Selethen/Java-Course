@@ -1,4 +1,4 @@
-package randomProgramy;
+package pl.com.selethen;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,7 +21,7 @@ public class Program {
 	/**
 	 * Funkcja main
 	 */
-	public static void main(String[] args) throws CalculatingException {
+	public static void main(String[] args) {
 		log.info("Program startuje");
 		try {
 			String stringNumbers = in();
@@ -30,8 +30,7 @@ public class Program {
 			out(number);
 			log.info("Koñczenie dzia³ania programu");
 		} catch (CalculatingException exception) {
-			System.out.println("Nast¹pi³ b³¹d.");
-			exception.printStackTrace();
+			System.out.println("Nast¹pi³ b³¹d. Powód b³êdu: " + exception.getMessage());
 		}
 	}
 
@@ -54,14 +53,19 @@ public class Program {
 	 * 
 	 * @param allNumbers
 	 * @return Zwraca listê liczb ca³kowitych
+	 * @throws CalculatingException
 	 */
-	public static List<Integer> parseList(String allNumbers) {
+	public static List<Integer> parseList(String allNumbers) throws CalculatingException {
 		List<String> numbers = new ArrayList<>();
 		numbers = Arrays.asList(allNumbers.split("\\s"));
 		List<Integer> indeedNumbers = new ArrayList<>();
 		for (String numberAsString : numbers) {
-			if (isNumber(numberAsString))
+			try {
 				indeedNumbers.add(Integer.parseInt(numberAsString));
+			} catch (NumberFormatException exc) {
+				throw new CalculatingException(
+						"nieprawid³owe dane wejœciowe: '" + numberAsString + "'." + "\n Proszê podaæ jedynie liczby.");
+			}
 		}
 		log.debug("String po sparsowaniu na listê liczb wygl¹da nastêpuj¹co: " + indeedNumbers);
 		return indeedNumbers;
@@ -95,7 +99,8 @@ public class Program {
 				return list.get(1);
 			} else {
 				log.debug("Na liœcie znajduj¹ siê 2 takie same elementy");
-				throw new CalculatingException("Nie mo¿na wskazaæ przednajmniejszej liczby");
+				throw new CalculatingException(
+						"Nie mo¿na wskazaæ przednajmniejszej liczby \n Proszê podaæ wiêcej ni¿ jeden RÓ¯NYCH elementów.");
 			}
 		} else {
 			for (i = 0; i < list.size() - 1; i++) {
@@ -107,30 +112,7 @@ public class Program {
 			}
 		}
 		log.debug("Na liœcie jest tylko jeden element lub jest wiele tych samych elementów");
-		throw new CalculatingException("Nie mo¿na wskazaæ przednajmniejszej liczby");
-	}
-
-	/**
-	 * Funkcja sprawdza czy w danym stringu znajduj¹ siê tylko cyfry lub
-	 * ewentualnie minus na pocz¹tku
-	 * 
-	 * @param s
-	 * @return true kiedy s¹ tylko cyfry lub minus na pocz¹tku, false kiedy sa
-	 *         inne znaki
-	 */
-	public static boolean isNumber(String s) {
-		if ((s.charAt(0) < '0' || s.charAt(0) > '9') && s.charAt(0) != '-') {
-			log.debug("Ci¹g znaków " + s + " nie jest liczb¹");
-			return false;
-		} else {
-			for (int i = 1; i < s.length(); i++) {
-				if (s.charAt(i) < '0' || s.charAt(i) > '9') {
-					log.debug("Ci¹g znaków " + s + " nie jest liczb¹");
-					return false;
-				}
-			}
-		}
-		log.debug("Ci¹g znaków " + s + " jest liczb¹");
-		return true;
+		throw new CalculatingException(
+				"nie mo¿na wskazaæ przednajmniejszej liczby. \n Proszê podaæ wiêcej ni¿ jeden RÓ¯NYCH elementów.");
 	}
 }

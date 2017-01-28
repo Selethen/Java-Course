@@ -1,8 +1,3 @@
-2017-01-23 15:29:19 INFO  Program:25 - Program startuje
-2017-01-23 15:29:21 DEBUG Program:47 - Wprowadzony ³añcuch znaków to: 
-2017-01-23 15:29:21 DEBUG Program:48 - 1 1 1
-2017-01-23 15:29:21 DEBUG Program:133 - Ci¹g znaków 1 jest liczb¹
-2017-01-23 15:29:21 DEBUG Program:133 - Ci¹g znaków 1 jest liczb¹
-2017-01-23 15:29:21 DEBUG Program:133 - Ci¹g znaków 1 jest liczb¹
-2017-01-23 15:29:21 DEBUG Program:66 - String po sparsowaniu na listê liczb wygl¹da nastêpuj¹co: [1, 1, 1]
-2017-01-23 15:29:21 DEBUG Program:109 - Na liœcie jest tylko jeden element lub jest wiele tych samych elementów
+2017-01-28 15:32:59 INFO  Program:25 - Program startuje
+2017-01-28 15:33:02 DEBUG Program:46 - Wprowadzony ³añcuch znaków to: 
+2017-01-28 15:33:02 DEBUG Program:47 - 1 f
